@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mingyue.mapper.JobNoticeMapper">
+
+    <insert id="insertMessage">
+        INSERT INTO dd_message (task_id, userName, title, text, createtime, success)
+        VALUES (#{taskId},#{userName}, #{title}, #{text},#{createtime}, #{success})
+    </insert>
+
+    <select id="compareMessage" resultType="integer">
+        SELECT COUNT(*) FROM dd_message WHERE userName = #{userName}
+        AND text = #{msg} AND createtime >= DATE_SUB(NOW(), INTERVAL 1 DAY)
+    </select>
+
+</mapper>
