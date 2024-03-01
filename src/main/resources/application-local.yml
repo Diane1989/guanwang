@@ -2,8 +2,8 @@ server:
   # 服务端口
   port: 8081
   servlet:
-    # 项目contextPath
-    context-path: /api/
+  # 项目contextPath
+      context-path: /api/
   undertow:
     accesslog:
       # Undertow 日志存放目录
@@ -37,6 +37,16 @@ spring:
     password: root
     url: jdbc:mysql:///stephanie?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 150
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
   #  springboot 2.6兼容Swagger2
   mvc:
     pathmatch:
@@ -53,4 +63,6 @@ swagger:
 dingtalk:
   appKey: dingie2zpz1moh4vwckl
   appSecret: TSmK0WB3Du5BBmwifsULoIE478fDaXmZUI8ZMhx0JVj1UZMnryWKzuysRipZUNq-
+  aes_key: woIag2tuEhhFxKFcMzZmFl37bQkmW7oza5oImoUNR32
+  token: woIag2tuEhhFxKFcMzZmFl37bQkmW7oza5oImoUNR32
 
