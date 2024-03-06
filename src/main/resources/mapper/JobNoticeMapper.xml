@@ -3,8 +3,8 @@
 <mapper namespace="com.mingyue.mapper.JobNoticeMapper">
 
     <insert id="insertMessage">
-        INSERT INTO dd_message (task_id, userName, title, text, createtime, success)
-        VALUES (#{taskId},#{userName}, #{title}, #{text},#{createtime}, #{success})
+        INSERT INTO dd_message (task_id, userName, title, text,email,phone, createtime, success)
+        VALUES (#{taskId},#{userName}, #{title}, #{text},#{email},#{phone},#{createtime}, #{success})
     </insert>
 
     <select id="compareMessage" resultType="integer">

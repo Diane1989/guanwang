@@ -17,6 +17,10 @@ public class MessageVo {
 
     private Date createtime;
 
+    private String phone;
+
+    private String email;
+
     private Boolean success;
 
 }

@@ -18,7 +18,7 @@ public class RateLimitInterceptor implements HandlerInterceptor {
     private JWT jwt;
 
     private final Map<String, RequestVo> ipRequests = new HashMap<>();
-    private static final int REQUEST_LIMIT = 20;
+    private static final int REQUEST_LIMIT = 2000;
     private static final Duration TIME_WINDOW = Duration.ofMinutes(1);
 
     @Override

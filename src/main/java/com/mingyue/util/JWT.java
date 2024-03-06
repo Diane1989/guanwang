@@ -34,8 +34,8 @@ public class JWT {
                 .compact();
 
         ipTokenMap.put(userIp, token);
-        response.setHeader("Authorization", token);
-        return "Success";
+//        response.setHeader("Authorization", token);
+        return token;
     }
 
 

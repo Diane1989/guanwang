@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface JobNoticeService {
 
-
     public Result submitMessage(ParmaVo parmaVo, HttpServletRequest request) throws Exception;
 
 }

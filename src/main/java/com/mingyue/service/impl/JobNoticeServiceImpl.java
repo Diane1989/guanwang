@@ -53,9 +53,9 @@ public class JobNoticeServiceImpl implements JobNoticeService {
         String uuId = parmaVo.getUuid();
 
         // 进行验证码校验
-        if (!captcha.verifyCaptcha(uuId)) {
-            return Result.error("验证码错误，留言提交失败!");
-        }
+//        if (!captcha.verifyCaptcha(uuId)) {
+//            return Result.error("验证码错误，留言提交失败!");
+//        }
 
         // 获取请求头中的Authorization信息（Token）
         String token = (String) req.getAttribute("Authorization");
@@ -68,27 +68,43 @@ public class JobNoticeServiceImpl implements JobNoticeService {
             return Result.error("Token验证失败，留言提交失败!");
         }
 
-        if (jobNoticeMapper.compareMessage(parmaVo.getUserName(), parmaVo.getMsg()) > 0) {
-            return Result.error("同一用户名和留言内容24小时内只能提交一次，留言提交失败!");
-        }
+//        if (jobNoticeMapper.compareMessage(parmaVo.getUserName(), parmaVo.getMsg()) > 0) {
+//            return Result.error("同一用户名和留言内容24小时内只能提交一次，留言提交失败!");
+//        }
 
         // 留言提交
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/message/corpconversation/asyncsend_v2");
         OapiMessageCorpconversationAsyncsendV2Request request = new OapiMessageCorpconversationAsyncsendV2Request();
         request.setAgentId(2863036127L);
-        request.setUseridList("020217234422848283");
+        request.setUseridList("020217234422848283,203136132926278689");
         request.setToAllUser(false);
 
         OapiMessageCorpconversationAsyncsendV2Request.Msg msg = new OapiMessageCorpconversationAsyncsendV2Request.Msg();
         msg.setMsgtype("markdown");
         msg.setMarkdown(new OapiMessageCorpconversationAsyncsendV2Request.Markdown());
-        msg.getMarkdown().setTitle(parmaVo.getUserName() + "发送留言：" + parmaVo.getTitle());
-        msg.getMarkdown().setText(parmaVo.getMsg());
+        // 获取当前时间
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String date = now.format(formatter);
+        msg.getMarkdown().setTitle(parmaVo.getUserName() + "发送留言:" + parmaVo.getTitle());
+        msg.getMarkdown().setText(" 标题：" + parmaVo.getTitle() + "  \n" +
+                "姓名：" + parmaVo.getUserName() + "  \n" +
+                "时间：" + date + "  \n" +
+                "内容：" + parmaVo.getMsg() + "  \n" +
+                "手机号：" + parmaVo.getPhone() + "  \n" +
+                "邮箱：" + parmaVo.getEmail() + "  \n" +"  </br>" +
+                "以上信息来自上海铭悦软件有限公司官网，请及时查看。");
+
+
         request.setMsg(msg);
 
         OapiMessageCorpconversationAsyncsendV2Response rsp = client.execute(request, accessToken.getAccessToken());
         MessageVo messageVo = parseJsonToMessage(JSON.toJSONString(rsp));
         messageVo.setUserName(parmaVo.getUserName());
+        messageVo.setTitle(parmaVo.getTitle());
+        messageVo.setText(parmaVo.getMsg());
+        messageVo.setPhone(parmaVo.getPhone());
+        messageVo.setEmail(parmaVo.getEmail());
         jobNoticeMapper.insertMessage(messageVo);
 
         return Result.success(rsp);

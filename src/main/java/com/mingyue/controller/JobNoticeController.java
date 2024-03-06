@@ -8,8 +8,6 @@ import com.mingyue.vo.ParmaVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
@@ -32,7 +30,7 @@ public class JobNoticeController {
     private Captcha captcha;
 
 
-    @ApiOperation(value = "提交留言", notes = "userName:用户名，email:邮箱，msg:留言内容，uuid:验证码")
+    @ApiOperation(value = "提交留言", notes = "userName:用户名，title:标题，msg:留言内容，email:邮箱，phone:手机号，uuid:验证码")
     @PostMapping("/submitMessage")
     public Result submitMessage(@RequestBody ParmaVo parmaVo,HttpServletRequest request) throws Exception {
         return jobNoticeService.submitMessage(parmaVo,request);
@@ -45,7 +43,7 @@ public class JobNoticeController {
     }
 
     @ApiOperation(value = "首页", notes = "用户测试notes")
-    @GetMapping("/index")
+    @PostMapping("/index")
     public String generateToken(HttpServletRequest request, HttpServletResponse response) throws Exception {
         return jwt.generateToken(request,response);
     }
