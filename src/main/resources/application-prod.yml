@@ -35,7 +35,7 @@ spring:
   datasource:
     username: root
     password: MinYue2023@Data
-    url: jdbc:mysql://jdbc:mysql://47.101.47.80:3306?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://47.101.47.80:3306/mingyue?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
