@@ -17,17 +17,12 @@ import com.mingyue.util.Captcha;
 import com.mingyue.util.JWT;
 import com.mingyue.vo.MessageVo;
 import com.mingyue.vo.ParmaVo;
-import com.taobao.api.internal.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -53,9 +48,10 @@ public class JobNoticeServiceImpl implements JobNoticeService {
         String uuId = parmaVo.getUuid();
 
         // 进行验证码校验
-//        if (!captcha.verifyCaptcha(uuId)) {
-//            return Result.error("验证码错误，留言提交失败!");
-//        }
+        if (!captcha.verifyCaptcha(uuId,req)) {
+            System.out.println(uuId);
+            return Result.error("验证码错误，留言提交失败!");
+        }
 
         // 获取请求头中的Authorization信息（Token）
         String token = (String) req.getAttribute("Authorization");

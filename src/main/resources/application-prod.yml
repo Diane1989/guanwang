@@ -48,6 +48,9 @@ spring:
       connection-timeout: 30000
       connection-test-query: SELECT 1
   #  springboot 2.6兼容Swagger2
+  redis:
+    host: 127.0.0.1
+    port: 6379
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
