@@ -64,9 +64,9 @@ public class JobNoticeServiceImpl implements JobNoticeService {
             return Result.error("Token验证失败，留言提交失败!");
         }
 
-//        if (jobNoticeMapper.compareMessage(parmaVo.getUserName(), parmaVo.getMsg()) > 0) {
-//            return Result.error("同一用户名和留言内容24小时内只能提交一次，留言提交失败!");
-//        }
+        if (jobNoticeMapper.compareMessage(parmaVo.getUserName(), parmaVo.getMsg()) > 0) {
+            return Result.error("同一用户名和留言内容24小时内只能提交一次，留言提交失败!");
+        }
 
         // 留言提交
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/message/corpconversation/asyncsend_v2");
