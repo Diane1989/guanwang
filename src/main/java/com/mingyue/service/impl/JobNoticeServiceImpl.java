@@ -72,7 +72,7 @@ public class JobNoticeServiceImpl implements JobNoticeService {
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/message/corpconversation/asyncsend_v2");
         OapiMessageCorpconversationAsyncsendV2Request request = new OapiMessageCorpconversationAsyncsendV2Request();
         request.setAgentId(2863036127L);
-        request.setUseridList("020217234422848283,203136132926278689");
+        request.setUseridList("020217234422848283"); //203136132926278689
         request.setToAllUser(false);
 
         OapiMessageCorpconversationAsyncsendV2Request.Msg msg = new OapiMessageCorpconversationAsyncsendV2Request.Msg();
