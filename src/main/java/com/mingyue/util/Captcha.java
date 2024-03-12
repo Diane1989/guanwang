@@ -39,7 +39,7 @@ public class Captcha extends HttpServlet {
         String iPKey = jwt.getClientIp(request);
         String key = "captcha:" + iPKey;
         CaptchaVo captchaVo = redisCache.getCacheObject(key);
-        if (captchaVo != null && captchaVo.getUuId().equals(uuId)) {
+        if (captchaVo != null && captchaVo.getUuId().equalsIgnoreCase(uuId)) {
             // 验证通过后删除验证码
             redisCache.remove(key);
             return true;

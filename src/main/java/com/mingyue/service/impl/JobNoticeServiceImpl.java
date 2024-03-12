@@ -72,7 +72,7 @@ public class JobNoticeServiceImpl implements JobNoticeService {
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/message/corpconversation/asyncsend_v2");
         OapiMessageCorpconversationAsyncsendV2Request request = new OapiMessageCorpconversationAsyncsendV2Request();
         request.setAgentId(2863036127L);
-        request.setUseridList("020217234422848283"); //203136132926278689
+        request.setUseridList("020217234422848283,203136132926278689"); //203136132926278689
         request.setToAllUser(false);
 
         OapiMessageCorpconversationAsyncsendV2Request.Msg msg = new OapiMessageCorpconversationAsyncsendV2Request.Msg();
@@ -83,7 +83,7 @@ public class JobNoticeServiceImpl implements JobNoticeService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String date = now.format(formatter);
         msg.getMarkdown().setTitle(parmaVo.getUserName() + "发送留言:" + parmaVo.getTitle());
-        msg.getMarkdown().setText(" 标题：" + parmaVo.getTitle() + "  \n" +
+        msg.getMarkdown().setText(" 标题：官网留言  \n" +
                 "姓名：" + parmaVo.getUserName() + "  \n" +
                 "时间：" + date + "  \n" +
                 "内容：" + parmaVo.getMsg() + "  \n" +
